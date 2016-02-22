@@ -1,8 +1,8 @@
 package dg.squash.main;
 
-import dg.squash.math.Vector2D;
-import dg.squash.ecs.components.NodeComponent;
 import dg.squash.ecs.Entity;
+import dg.squash.ecs.components.NodeComponent;
+import dg.squash.math.Vector2D;
 import javafx.animation.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -10,9 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -77,7 +76,7 @@ public class AnimationCreator {
     }
 
     public static Animation blowUpAnimation(Entity entity, Game game) {
-        Rectangle rectangle = (Rectangle) entity.getComponent(NodeComponent.class).show();
+        ImageView rectangle = (ImageView) entity.getComponent(NodeComponent.class).show();
         List<Image> images = new ArrayList<>();
         images.add(AssetManager.TOMATO_SPLAT_1);
         images.add(AssetManager.TOMATO_SPLAT_2);
@@ -88,7 +87,7 @@ public class AnimationCreator {
         Timeline timeline = new Timeline();
         int dur = 100;
         for (Image image : images) {
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(dur), new KeyValue(rectangle.fillProperty(), new ImagePattern(image)));
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(dur), new KeyValue(rectangle.imageProperty(), image));
             timeline.getKeyFrames().add(keyFrame);
             dur += 100;
         }
