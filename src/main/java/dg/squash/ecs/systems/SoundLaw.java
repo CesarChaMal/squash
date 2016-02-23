@@ -1,11 +1,9 @@
 package dg.squash.ecs.systems;
 
 import dg.squash.ecs.components.HealthComponent;
-import dg.squash.events.HealthListener;
 
-public class SoundLaw implements HealthListener {
+public class SoundLaw  {
 
-    @Override
     public void update(HealthComponent component) {
         int health = component.show();
         if (health > 0) {

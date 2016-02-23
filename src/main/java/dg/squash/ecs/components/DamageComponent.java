@@ -2,25 +2,13 @@ package dg.squash.ecs.components;
 
 import dg.squash.ecs.Entity;
 
-public class DamageComponent extends AbstractComponent {
-
-    private int damage = 0;
-
-    public DamageComponent(Entity parent) {
-        super(parent);
-    }
+public class DamageComponent extends AbstractComponent<Integer> {
 
     public DamageComponent(Entity parent, int damage) {
-        super(parent);
-        this.damage = damage;
+        super(parent, damage);
     }
 
-    public int show() {
-        return damage;
+    public DamageComponent(Entity parent) {
+        super(parent, 0);
     }
-
-    public void modify(int damage) {
-        this.damage = damage;
-    }
-
 }

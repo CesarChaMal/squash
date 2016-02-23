@@ -1,21 +1,23 @@
-package dg.squash.main;
+package dg.squash.ecs;
 
-import dg.squash.ecs.Entity;
+import dg.squash.ecs.components.NameComponent;
+import dg.squash.exceptions.NoSuchNameException;
 import dg.squash.utils.TwoTuple;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class GameWorld {
+public class EntityEngine {
 
     private final List<Entity> entities;
     private final List<TwoTuple<Entity, Entity>> collisions;
 
-    public GameWorld() {
+    public EntityEngine() {
         this.entities = new ArrayList<>();
         this.collisions = new ArrayList<>();
     }
+
     public List<Entity> getEntities() {
         return entities;
     }
@@ -30,6 +32,13 @@ public class GameWorld {
         if (!entities.contains(collision.getT2()))
             entities.add(collision.getT2());
         collisions.add(collision);
+    }
+
+    public Entity getEntity(String name) {
+        for (Entity e : entities)
+            if (e.hasComponent(NameComponent.class) && e.getComponent(NameComponent.class).show().equals(name))
+                return e;
+        throw new NoSuchNameException(name);
     }
 
     public void removeCollision(final TwoTuple<Entity, Entity> collision) {
