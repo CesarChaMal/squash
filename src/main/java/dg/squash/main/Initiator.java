@@ -50,6 +50,7 @@ public class Initiator {
         initContainers();
         initTotalScoreText();
         initProgressBar();
+        initLives();
 
 
         initBoard();
@@ -154,8 +155,17 @@ public class Initiator {
         ImageView rectangle = NodeCreator.createBoundView(AssetManager.BOARD, rectangleShape);
 
         InputComponent input = new InputComponent(board);
-        input.show().setLeft(() -> board.getComponent(ShapeComponent.class).moveHorizontal(-15));
-        input.show().setRight(() -> board.getComponent(ShapeComponent.class).moveHorizontal(15));
+        input.show().setLeft(() -> {
+            board.getComponent(ShapeComponent.class).moveHorizontal(-15);
+            if (board.getComponent(ShapeComponent.class).getPosition().getX() < 0)
+                board.getComponent(ShapeComponent.class).setPosition(new Vector2D(0, position.getY()));
+        });
+        input.show().setRight(() -> {
+            board.getComponent(ShapeComponent.class).moveHorizontal(15);
+            if(board.getComponent(ShapeComponent.class).getPosition().getX() + rectangleShape.getWidth() > WIDTH)
+                board.getComponent(ShapeComponent.class).setPosition(new Vector2D(WIDTH - rectangleShape.getWidth(), position.getY()));
+        });
+
 
         board.addComponent(input);
         board.addComponent(new NameComponent(board, "BOARD"));
@@ -175,7 +185,7 @@ public class Initiator {
 
     private void initBall() {
 
-        double radius = 15;
+        double radius = 18;
         Vector2D position = new Vector2D(50, 50);
 
         RectangleShape board = (RectangleShape) entityEngine.getEntity("BOARD").getComponent(ShapeComponent.class).show();
@@ -196,6 +206,19 @@ public class Initiator {
         ball.addComponent(new DamageComponent(ball, 1));
 
         addEntity(ball);
+    }
+
+    private void initLives() {
+        int xOffset = 0;
+        for (int i = 0; i < 3; i++) {
+            Vector2D position = new Vector2D(570 + xOffset, 25);
+            int radius = 18;
+            Entity ball = new Entity();
+            ball.addComponent(new NameComponent(ball, "LIVE_" + i));
+            ball.addComponent(new NodeComponent(ball, NodeCreator.createView(position, radius * 2, radius * 2, AssetManager.BALL)));
+            addEntity(ball);
+            xOffset += 42;
+        }
     }
 
     private void initWalls() {
@@ -372,7 +395,7 @@ public class Initiator {
                             return;
                         ((CircleShape) ball.getComponent(ShapeComponent.class).show()).centerXProperty().unbind();
                         ((CircleShape) ball.getComponent(ShapeComponent.class).show()).centerYProperty().unbind();
-                        ball.getComponent(VelocityComponent.class).modify(new Vector2D(15, -15));
+                        ball.getComponent(VelocityComponent.class).modify(new Vector2D(5, -5));
                         break;
                 }
             }

@@ -21,6 +21,7 @@ public class Squash extends Application {
     private EntityEngine entityEngine;
     private boolean isRunning = false;
     private Stage stage;
+    private SquashSplash squashSplash = new SquashSplash();
 
     private final AnimationTimer time = new AnimationTimer() {
         @Override
@@ -30,6 +31,11 @@ public class Squash extends Application {
             for (Entity e : entityEngine.getEntity("BIN").getComponent(EntityComponent.class).show()) {
                 entityEngine.removeEntity(e);
                 initiator.getGroup().getChildren().remove(e.getComponent(NodeComponent.class).show());
+            }
+            if (!entityEngine.hasEntity("LIVE_0")) {
+                initiator = new Initiator();
+                stage.setScene(initiator.getScene());
+                initAll();
             }
         }
     };
@@ -41,14 +47,28 @@ public class Squash extends Application {
         stage.sizeToScene();
         stage.setResizable(false);
 
-        initAll();
+        initSplash();
+
+    }
+
+    private void initSplash() {
+
+        stage.setScene(squashSplash.getScene());
+        squashSplash.initExitButton();
+        squashSplash.initPlayButton(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                initAll();
+                stage.setScene(initiator.getScene());
+            }
+        });
+        stage.show();
     }
 
     private void initAll() {
 
         entityEngine = initiator.getEntityEngine();
         systemEngine = new SystemEngine(entityEngine);
-        stage.setScene(initiator.getScene());
         initPauseButton();
         initResumeButton();
         initRestartButton();
@@ -83,6 +103,7 @@ public class Squash extends Application {
             @Override
             public void handle(MouseEvent event) {
                 initiator = new Initiator();
+                stage.setScene(initiator.getScene());
                 initAll();
             }
         });

@@ -14,15 +14,13 @@ public class SystemEngine {
     private final RenderSystem renderSystem = new RenderSystem(this);
     private final DestroyEnemySystem destroyEnemySystem = new DestroyEnemySystem(this);
     private final InputSystem inputSystem = new InputSystem(this);
+    private final RepositionSystem repositionSystem = new RepositionSystem(this);
     private EntityEngine entityEngine;
 
     public SystemEngine(EntityEngine entityEngine) {
         this.entityEngine = entityEngine;
     }
 
-    public void resetEntities(EntityEngine entityEngine){
-        this.entityEngine = entityEngine;
-    }
     public <T extends Component> void update(Entity entity, Class<T> component) {
         if (component.equals(HealthComponent.class)) {
             scoreSystem.update(entity, entity.getComponent(HealthComponent.class));
@@ -37,6 +35,7 @@ public class SystemEngine {
 
     public void update(Entity e1, Entity e2) {
         healthSystem.update(e1, e2);
+        repositionSystem.update(e1, e2, entityEngine);
     }
 
     public void start() {

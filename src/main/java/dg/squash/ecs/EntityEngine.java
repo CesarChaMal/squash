@@ -41,6 +41,14 @@ public class EntityEngine {
         throw new NoSuchNameException(name);
     }
 
+    public boolean hasEntity(String name) {
+        for (Entity e : entities)
+            if (e.hasComponent(NameComponent.class) && e.getComponent(NameComponent.class).show().equals(name))
+                return true;
+
+        return false;
+    }
+
     public void removeCollision(final TwoTuple<Entity, Entity> collision) {
         collisions.remove(collision);
     }

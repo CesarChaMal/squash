@@ -2,12 +2,15 @@ package dg.squash.main;
 
 
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
+
+import java.io.File;
 
 public class AssetManager {
 
-   // public static final AudioClip BE_HAPPY = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\be_Happy.mp3").toURI().toString());
-   // public static final AudioClip SPLAT = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\splat.mp3").toURI().toString());
-   // public static final AudioClip TOMATO_HIT = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\tomato_hit.mp3").toURI().toString());
+    // public static final AudioClip BE_HAPPY = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\be_Happy.mp3").toURI().toString());
+    public static final AudioClip SPLAT = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\splat.mp3").toURI().toString());
+    public static final AudioClip TOMATO_HIT = new AudioClip(new File("C:\\Users\\dg467\\Integration2\\src\\dg\\squash\\assets\\audio\\tomato_hit.mp3").toURI().toString());
 
     public static final Image SPLASH_SCREEN_BACKGROUND = new Image("dg/squash/assets/images/bg.jpg");
     public static final Image PAUSED_CONTAINER = new Image("dg/squash/assets/images/paused_container.png");
@@ -44,6 +47,10 @@ public class AssetManager {
 
 
     private AssetManager() {
+    }
+
+    static {
+
 
     }
 }

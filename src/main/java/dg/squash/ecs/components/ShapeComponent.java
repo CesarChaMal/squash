@@ -21,7 +21,6 @@ public class ShapeComponent extends AbstractComponent<Shape> {
 
     public void moveHorizontal(double moveBy) {
         setPosition(new Vector2D(show().getPosition().getX() + moveBy, show().getPosition().getY()));
-
     }
 
     public Vector2D getPosition() {
