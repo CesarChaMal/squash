@@ -3,8 +3,25 @@ package dg.squash.shape;
 import dg.squash.math.Vector2D;
 import javafx.beans.property.SimpleDoubleProperty;
 
+/**
+ * Circle object.
+ */
 public class CircleShape implements Shape {
 
+    private SimpleDoubleProperty centerXProperty;
+    private SimpleDoubleProperty centerYProperty;
+    private SimpleDoubleProperty radiusProperty;
+
+    /**
+     * Constructor of circleShape.
+     * @param center center of circle
+     * @param radius radius of circle
+     */
+    public CircleShape(Vector2D center, double radius) {
+        centerXProperty = new SimpleDoubleProperty(this, "centerX", center.getX());
+        centerYProperty = new SimpleDoubleProperty(this, "centerY", center.getX());
+        radiusProperty = new SimpleDoubleProperty(this, "radius", radius);
+    }
 
     public SimpleDoubleProperty centerXProperty() {
         return centerXProperty;
@@ -16,16 +33,6 @@ public class CircleShape implements Shape {
 
     public SimpleDoubleProperty centerYProperty() {
         return centerYProperty;
-    }
-
-    private SimpleDoubleProperty centerXProperty;
-    private SimpleDoubleProperty centerYProperty;
-    private SimpleDoubleProperty radiusProperty;
-
-    public CircleShape(Vector2D center, double radius) {
-        centerXProperty = new SimpleDoubleProperty(this, "centerX", center.getX());
-        centerYProperty = new SimpleDoubleProperty(this, "centerY", center.getX());
-        radiusProperty = new SimpleDoubleProperty(this, "radius", radius);
     }
 
     @Override

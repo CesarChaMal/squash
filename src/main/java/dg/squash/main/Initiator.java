@@ -6,7 +6,7 @@ import dg.squash.ecs.components.*;
 import dg.squash.math.Vector2D;
 import dg.squash.shape.CircleShape;
 import dg.squash.shape.RectangleShape;
-import dg.squash.utils.TwoTuple;
+import dg.squash.utils.Pair;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -70,11 +70,11 @@ public class Initiator {
 
     public void initCollisions() {
         Entity ball = entityEngine.getEntity("BALL");
-        entityEngine.getCollisions().add(new TwoTuple<>(entityEngine.getEntity("BOARD"), ball));
-        entityEngine.getCollisions().add(new TwoTuple<>(entityEngine.getEntity("LEFT_WALL"), ball));
-        entityEngine.getCollisions().add(new TwoTuple<>(entityEngine.getEntity("RIGHT_WALL"), ball));
-        entityEngine.getCollisions().add(new TwoTuple<>(entityEngine.getEntity("TOP_WALL"), ball));
-        entityEngine.getCollisions().add(new TwoTuple<>(entityEngine.getEntity("BOTTOM_WALL"), ball));
+        entityEngine.getCollisions().add(new Pair<>(entityEngine.getEntity("BOARD"), ball));
+        entityEngine.getCollisions().add(new Pair<>(entityEngine.getEntity("LEFT_WALL"), ball));
+        entityEngine.getCollisions().add(new Pair<>(entityEngine.getEntity("RIGHT_WALL"), ball));
+        entityEngine.getCollisions().add(new Pair<>(entityEngine.getEntity("TOP_WALL"), ball));
+        entityEngine.getCollisions().add(new Pair<>(entityEngine.getEntity("BOTTOM_WALL"), ball));
     }
 
     private void initPauseContainer() {
@@ -131,7 +131,7 @@ public class Initiator {
                 Entity tomato = createTomato(new Vector2D(225 + xOffset, 170 + yOffset), 50, 50, health);
                 xOffset += 50 + xGap;
                 addEntity(tomato);
-                entityEngine.getCollisions().add(new TwoTuple<>(tomato, ball));
+                entityEngine.getCollisions().add(new Pair<>(tomato, ball));
             }
             health--;
             xOffset = 0;

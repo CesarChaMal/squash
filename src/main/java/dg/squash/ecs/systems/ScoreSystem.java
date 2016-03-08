@@ -14,6 +14,7 @@ public class ScoreSystem extends AbstractECSystem  {
     }
 
     public void update(Entity entity, HealthComponent healthComponent) {
+
         int health = healthComponent.show();
         if (health > 0) {
             entity.getComponent(ScoreComponent.class).modify(10);

@@ -2,7 +2,7 @@ package dg.squash.ecs;
 
 import dg.squash.ecs.components.NameComponent;
 import dg.squash.exceptions.NoSuchNameException;
-import dg.squash.utils.TwoTuple;
+import dg.squash.utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public class EntityEngine {
 
     private final List<Entity> entities;
-    private final List<TwoTuple<Entity, Entity>> collisions;
+    private final List<Pair<Entity, Entity>> collisions;
 
     public EntityEngine() {
         this.entities = new ArrayList<>();
@@ -22,11 +22,11 @@ public class EntityEngine {
         return entities;
     }
 
-    public List<TwoTuple<Entity, Entity>> getCollisions() {
+    public List<Pair<Entity, Entity>> getCollisions() {
         return collisions;
     }
 
-    public void addCollision(final TwoTuple<Entity, Entity> collision) {
+    public void addCollision(final Pair<Entity, Entity> collision) {
         if (!entities.contains(collision.getT1()))
             entities.add(collision.getT1());
         if (!entities.contains(collision.getT2()))
@@ -49,7 +49,7 @@ public class EntityEngine {
         return false;
     }
 
-    public void removeCollision(final TwoTuple<Entity, Entity> collision) {
+    public void removeCollision(final Pair<Entity, Entity> collision) {
         collisions.remove(collision);
     }
 
@@ -58,9 +58,9 @@ public class EntityEngine {
         collisions.removeAll(findPairs(entity));
     }
 
-    private List<TwoTuple<Entity, Entity>> findPairs(final Entity entity) {
-        List<TwoTuple<Entity, Entity>> removals = new ArrayList<>();
-        for (TwoTuple pair : collisions)
+    private List<Pair<Entity, Entity>> findPairs(final Entity entity) {
+        List<Pair<Entity, Entity>> removals = new ArrayList<>();
+        for (Pair pair : collisions)
             if ((pair.getT1() == entity) || (pair.getT2() == entity))
                 removals.add(pair);
         return removals;

@@ -2,7 +2,7 @@ package dg.squash.ecs;
 
 import dg.squash.ecs.components.*;
 import dg.squash.ecs.systems.*;
-import dg.squash.utils.TwoTuple;
+import dg.squash.utils.Pair;
 
 public class SystemEngine {
 
@@ -49,7 +49,7 @@ public class SystemEngine {
             }
         }
 
-        for (TwoTuple<Entity, Entity> t : entityEngine.getCollisions()) {
+        for (Pair<Entity, Entity> t : entityEngine.getCollisions()) {
             collisionSystem.update(t.getT1(), t.getT2());
         }
     }
