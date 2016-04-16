@@ -14,7 +14,7 @@ public class SquashSplash {
     public SquashSplash() {
 
         root = new Group();
-        this.scene = new Scene(root, Main.WIDTH, Main.HEIGHT);
+        this.scene = new Scene(root, Squash.WIDTH, Squash.HEIGHT);
         init();
     }
 

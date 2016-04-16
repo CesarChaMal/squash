@@ -16,6 +16,8 @@ import javafx.util.Duration;
 
 public class Squash extends Application {
 
+    public static final int WIDTH = 1024;
+    public static final int HEIGHT = 768;
     private Initiator initiator = new Initiator();
     private SystemEngine systemEngine;
     private EntityEngine entityEngine;
@@ -32,7 +34,7 @@ public class Squash extends Application {
                 entityEngine.removeEntity(e);
                 initiator.getGroup().getChildren().remove(e.getComponent(NodeComponent.class).show());
             }
-            if (!entityEngine.hasEntity("LIVE_0")) {
+            if (entityEngine.hasEntity("RESTART")) {
                 initiator = new Initiator();
                 stage.setScene(initiator.getScene());
                 initAll();
@@ -48,6 +50,7 @@ public class Squash extends Application {
         stage.setResizable(false);
 
         initSplash();
+        AssetManager.BE_HAPPY.play();
 
     }
 

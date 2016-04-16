@@ -1,7 +1,6 @@
 package dg.squash.ecs;
 
 import dg.squash.ecs.components.NameComponent;
-import dg.squash.exceptions.NoSuchNameException;
 import dg.squash.utils.Pair;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class EntityEngine {
         for (Entity e : entities)
             if (e.hasComponent(NameComponent.class) && e.getComponent(NameComponent.class).show().equals(name))
                 return e;
-        throw new NoSuchNameException(name);
+        return null;
     }
 
     public boolean hasEntity(String name) {

@@ -14,4 +14,4 @@ dependencies {
 }
 
 apply plugin: 'application'
-mainClassName = 'dg.squash.main.Main'
+mainClassName = 'dg.squash.main.Squash'
