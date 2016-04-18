@@ -7,6 +7,9 @@ import dg.squash.exceptions.NoSuchComponentException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ */
 public class Entity {
 
     private final Set<Component> components;
@@ -43,20 +46,37 @@ public class Entity {
         return false;
     }
 
-    public final <T extends Component> boolean hasAllComponents(final Class<T>[] types) {
-        for (final Class<T> t : types)
+    /**
+     * Checks if an entity has all the provided components.
+     * @param types is an array of components to check if entity contains them all.
+     * @return boolean true if an entity has all the components, false - otherwise
+     */
+    public <T extends Component> boolean hasAllComponents(Class<T>[] types) {
+        for (Class<T> t : types)
             if (!this.hasComponent(t))
                 return false;
         return true;
     }
 
-    public void addComponent(final Component component) {
+    /**
+     * Adds commponent to the entity. If entity already has this component, then
+     * exception will be thrown.
+     * @param component to be added
+     * @throws DuplicateComponentException if entity already has a component
+     */
+    public void addComponent(Component component) {
+        // first check if the entity already have this component
         this.checkForDuplicate(component);
+        // if it doesn't have add it
         this.components.add(component);
     }
 
-    private void checkForDuplicate(final Component component) {
-        for (final Component c : this.components) {
+    /*
+    * Checks if entity has a component and if it does it will throw a
+    * DuplicateComponentException.
+    */
+    private void checkForDuplicate(Component component) {
+        for (Component c : this.components) {
             if (component.getClass().equals(c.getClass()))
                 throw new DuplicateComponentException(c.getClass());
         }
@@ -64,14 +84,11 @@ public class Entity {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append("ID: ").append("\n");
-        //   builder.append("Name: " + type + "\n");
-        for (final Component c : this.components)
+        for (Component c : this.components)
             builder.append(c.getClass().getSimpleName()).append(": ").append(c).append("\n");
         return builder.toString();
     }
-
-
 }
 
