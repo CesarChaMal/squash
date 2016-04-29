@@ -1,0 +1,9 @@
+dg.squash.ecs
+dg.squash.ecs.components
+dg.squash.ecs.systems
+dg.squash.events
+dg.squash.exceptions
+dg.squash.main
+dg.squash.math
+dg.squash.shape
+dg.squash.utils
