@@ -4,7 +4,9 @@ import dg.squash.ecs.Entity;
 import dg.squash.ecs.EntityEngine;
 import dg.squash.ecs.SystemEngine;
 import dg.squash.ecs.components.EntityComponent;
+import dg.squash.ecs.components.GameComponent;
 import dg.squash.ecs.components.NodeComponent;
+import dg.squash.server.Post;
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -13,9 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.net.URL;
-import java.net.URLConnection;
+import org.json.simple.JSONObject;
 
 public class Squash extends Application {
 
@@ -27,6 +27,7 @@ public class Squash extends Application {
     private boolean isRunning = false;
     private Stage stage;
     private SquashSplash squashSplash = new SquashSplash();
+    private Post post;
 
     private final AnimationTimer time = new AnimationTimer() {
         @Override
@@ -52,9 +53,7 @@ public class Squash extends Application {
         stage.sizeToScene();
         stage.setResizable(false);
 
-        URL url = new URL("http://localhost/test.php?print=success");
-        URLConnection connection = url.openConnection();
-        connection.connect();
+        post = new Post();
 
         initSplash();
         AssetManager.BE_HAPPY.play();
@@ -82,6 +81,7 @@ public class Squash extends Application {
         initPauseButton();
         initResumeButton();
         initRestartButton();
+        initOptionsButton();
         time.start();
         stage.show();
     }
@@ -102,6 +102,24 @@ public class Squash extends Application {
                     pauseAnimation.play();
                     time.start();
                 }
+            }
+        });
+    }
+
+    private void initOptionsButton() {
+        Node option = entityEngine.getEntity("OPTION_BUTTON").getComponent(NodeComponent.class).show();
+
+        option.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                JSONObject jo = new JSONObject();
+                jo.put("name", "guest" +(int )(Math.random() * 1000 + 1));
+                jo.put("score", entityEngine.getEntity("GAME").getComponent(GameComponent.class).show().getTotalScore());
+                post.executePost("http://dgblog.eu-west-1.elasticbeanstalk.com/index.php", jo);
+
+                initiator = new Initiator();
+                initSplash();
+
             }
         });
     }

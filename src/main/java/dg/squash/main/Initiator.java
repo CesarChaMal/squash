@@ -63,6 +63,7 @@ public class Initiator {
         initPauseButton();
         initResumeButton();
         initRestartButton();
+        initOptionButton();
 
         initCollisions();
         initInput();
@@ -318,41 +319,27 @@ public class Initiator {
         restartButton.addComponent(new NodeComponent(restartButton, restart));
         addEntity(restartButton);
     }
-/*
-    public static Entity createOptionsButton(double width, double height) {
 
-        Entity pauseButton = new Entity();
+    private void initOptionButton() {
 
-        ImageView container = (ImageView) entity.getComponent(NodeComponent.class).show();
-        ImageView restart = new ImageView(AssetManager.OPTIONS_BUTTON);
-        restart.setFitWidth(width);
-        restart.setFitHeight(height);
-        restart.layoutXProperty().bind(container.layoutXProperty().add(container.getFitWidth() / 2 - restart.getFitWidth() / 2));
-        restart.layoutYProperty().bind(container.translateYProperty().subtract(130));
-        restart.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                restart.setImage(AssetManager.OPTIONS_BUTTON_HOVER);
-            }
-        });
-        restart.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                restart.setImage(AssetManager.OPTIONS_BUTTON);
-            }
-        });
+        Entity optionButton = new Entity();
 
-        restart.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            }
-        });
+        ImageView option = new ImageView(AssetManager.OPTIONS_BUTTON);
+        option.setFitWidth(150);
+        option.setFitHeight(50);
 
-        pauseButton.addComponent(new NodeComponent(pauseButton, restart));
-        return pauseButton;
+        ImageView container = (ImageView) entityEngine.getEntity("PAUSE_CONTAINER").getComponent(NodeComponent.class).show();
+        option.layoutXProperty().bind(container.layoutXProperty().add(container.getFitWidth() / 2 - option.getFitWidth() / 2));
+        option.layoutYProperty().bind(container.translateYProperty().subtract(125));
+
+        option.setOnMouseEntered(event -> option.setImage(AssetManager.OPTIONS_BUTTON_HOVER));
+        option.setOnMouseExited(event -> option.setImage(AssetManager.OPTIONS_BUTTON));
+
+        optionButton.addComponent(new NameComponent(optionButton, "OPTION_BUTTON"));
+        optionButton.addComponent(new NodeComponent(optionButton, option));
+        addEntity(optionButton);
     }
 
-    */
 
     private void initProgressBar() {
 
@@ -375,6 +362,8 @@ public class Initiator {
         entity.addComponent(new NameComponent(entity, name));
         return entity;
     }
+
+
 
     private void initInput() {
         Entity board = entityEngine.getEntity("BOARD");
