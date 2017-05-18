@@ -12,14 +12,14 @@ A *breakout* game clone written in JavaFX.
 
 ## Gameplay
 
-As per traditional *breakout* player must destroy all enemies (tomatoes in this case), to progress
+As per traditional *breakout* player must destroy all enemies (tomatoes in this case) to progress
 to next level. Unfortunately, at the moment only one level exists. 
 
 To destroy an enemy player must hit it with a ball witch bounces all over the screen.
-If ball hits the ground player looses one life, but not a progress of the level. Some, balls 
+If ball hits the ground player looses one life, but not a progress of the level. Some balls 
 have resistance, thus needs more hits to be destroyed.
 
-For each destroyed tomato, player gets some points.
+For each destroyed tomato player gets some points.
 
 ## Further work
 
@@ -46,4 +46,4 @@ version 8 installed. To check run `java -version`.
 ## Licence 
 
 This project is licensed under the GNU General Public License v3.0 - see the 
-[LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html) file for details.
+[LICENSE](https://github.com/grrinchas/squash/blob/master/LICENCE) file for details.
