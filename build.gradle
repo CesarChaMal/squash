@@ -1,9 +1,12 @@
+
+apply plugin: 'application'
+apply plugin: 'java'
+
 group 'squash'
 version '1.0'
 
-apply plugin: 'java'
-
 sourceCompatibility = 1.8
+mainClassName = 'dg.squash.main.Squash'
 
 repositories {
     mavenCentral()
@@ -13,13 +16,3 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart',
-                'Implementation-Version': version,
-                'Main-Class': 'dg.squash.main.Squash'
-    }
-}
-
-apply plugin: 'application'
-mainClassName = 'dg.squash.main.Squash'

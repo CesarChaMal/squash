@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.net.URLConnection;
 
+@SuppressWarnings("all")
 public class Squash extends Application {
 
     public static final int WIDTH = 1024;
@@ -51,10 +52,6 @@ public class Squash extends Application {
         stage.setTitle("Squash");
         stage.sizeToScene();
         stage.setResizable(false);
-
-        URL url = new URL("http://localhost/test.php?print=success");
-        URLConnection connection = url.openConnection();
-        connection.connect();
 
         initSplash();
         AssetManager.BE_HAPPY.play();
